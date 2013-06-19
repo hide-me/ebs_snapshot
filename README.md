@@ -17,4 +17,4 @@ you can modify based on your needs. check doc from Amazon - http://docs.aws.amaz
 
 4) Download script file(ebs_backup.sh) to development server home folder
 
-5) add crontab job on development server - 00 6 * * * sh <path to script file>
+5) add crontab job on development server - 00 6 * * * sh < path to script file >
