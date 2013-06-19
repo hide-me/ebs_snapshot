@@ -37,7 +37,7 @@ echo "Backup for Volume - $volume"
  if [ $dayinweek -eq 7 ]
  then
   echo "Weekly Backup `date +%U-%Y` start"
-   ec2-describe-snapshots -C $my_cert -K $my_key --region $my_region -F "volume-id=$volume" -F "description=$volume-Daliy-Backup-`date +%x`" | grep SNAPSHOT | awk '{print $2}' >> /tmp/daliy_info.txt 2>&1
+   ec2-describe-snapshots -C $my_cert -K $my_key --region $my_region -F "volume-id=$volume" -F "description=$volume-Daliy-Backup-`date +%x --date='7 days ago'`" | grep SNAPSHOT | awk '{print $2}' >> /tmp/daliy_info.txt 2>&1
 
   for snapshot in $(cat /tmp/daliy_info.txt)
    do
@@ -50,7 +50,7 @@ echo "Backup for Volume - $volume"
 
   #Daliy Backup
   echo "Daily Backup start"
-  ec2-describe-snapshots -C $my_cert -K $my_key --region $my_region -F "volume-id=$volume" -F "description=$volume-Daliy-Backup-`date +%x`" | grep SNAPSHOT | awk '{print $2}' >> /tmp/snap_info.txt 2>&1
+  ec2-describe-snapshots -C $my_cert -K $my_key --region $my_region -F "volume-id=$volume" -F "description=$volume-Daliy-Backup-`date +%x --date='7 days ago'`" | grep SNAPSHOT | awk '{print $2}' >> /tmp/snap_info.txt 2>&1
   ec2-create-snapshot $volume -K $my_key  -C $my_cert --region $my_region --description "$volume-Daliy-Backup-`date +%x`"
   echo "End of Backup Volume - $volume"
   
